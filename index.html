@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de candidature</title>
+</head>
+<body>
+    <h1>Formulaire de candidature</h1>
+    <form action="connexion.php" method="post">
+         <fieldset>
+            <legend>Informations personnelles</legend>
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" required><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required><br><br>
+
+            <label for="telephone">Phone number:</label>
+            <input type="tel" name="telephone" id="telephone" required><br><br>
+
+            <label for="sex">Sex:</label>
+            <input type="radio" name="sex" id="H" value="H" >
+            <label for="H">H</label>
+            <input type="radio" name="sex" id="F" value="F" >
+            <label for="F">F</label>
+
+         </fieldset><br>
+
+         <fieldset>
+            <legend>Parcours professionel</legend>
+            <label for="cv">CV:</label>
+            <input type="file" name="cv" id="cv" required><br><br>
+
+            <label for="letter">Cover letter:</label>
+            <input type="file" name="letter" id="letter" required><br><br>
+
+            <label for="level">Level of study:</label>
+            <input type="text" name="level" id="level" required><br><br>
+             
+         </fieldset><br><br>
+
+         <input type="submit" value="submit">
+
+    </form>
+    <h2><a href="view.php">Afficher la liste des candidats</a>
+</body>
+</html>
