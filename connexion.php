@@ -49,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $connexion->close();
 ?><br><br>
 <!--<button><a href="view.php">Visualiser les donnees.</a></button>-->
+<button><a href="index.html">S'inscrire</a></button>
 
 </body>
 </html>
