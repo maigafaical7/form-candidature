@@ -29,17 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = isset($_POST['email']) ? $_POST['email'] : '';
     $telephone = isset($_POST['telephone']) ? $_POST['telephone'] : '';
     $sex = isset($_POST['sex']) ? $_POST['sex'] : '';
+    $cv= isset($_POST['cv']) ? $_POST['cv'] : '';
+    $letter = isset($_POST['letter']) ? $_POST['letter'] : '';
     $level = isset($_POST['level']) ? $_POST['level'] : '';
 
-    // Vérification des fichiers
-    $cv = isset($_FILES['cv']) ? $_FILES['cv']['name'] : '';
-    $letter = isset($_FILES['letter']) ? $_FILES['letter']['name'] : '';
-
-    // Déplacement des fichiers uploadés vers un dossier sur le serveur
-    if ($cv && $letter) {
-        move_uploaded_file($_FILES['cv']['tmp_name'], "uploads/" . basename($cv));
-        move_uploaded_file($_FILES['letter']['tmp_name'], "uploads/" . basename($letter));
-    }
 
     // Préparer et exécuter la requête d'insertion
     $sql = "INSERT INTO Candidature (nom, email, telephone, sex, cv, letter, level) 
@@ -55,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Fermer la connexion
 $connexion->close();
 ?><br><br>
-<button><a href="view.php">Voir les données</a></button>
+<!--<button><a href="view.php">Visualiser les donnees.</a></button>-->
+
 </body>
 </html>
