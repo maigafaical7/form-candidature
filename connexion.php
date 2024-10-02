@@ -3,46 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription a la candidature</title>
-   
+    <title>Inscription à la candidature</title>
 </head>
 <body>
+
 <?php
 // Connexion à la base de données
 $serveur = "localhost";
 $utilisateur = "root";
 $mot_de_passe = "";
-$base_de_données = "db_candidature";
+$base_de_donnees = "init_php";
 
-$connexion = new mysqli($serveur, $utilisateur, $mot_de_passe, $base_de_données);
+$connexion = new mysqli($serveur, $utilisateur, $mot_de_passe, $base_de_donnees);
 
 // Vérifier la connexion
 if ($connexion->connect_error) {
     die("La connexion a échoué : " . $connexion->connect_error);
 }
 
-// Récupérer les données du formulaire
-$nom = $_POST['name'];
-$email = $_POST['email'];
-$telephone = $_POST['telephone'];
-$sex=$_POST['sex'];
-$cv=$_POST['cv'];
-$letter=$_POST['letter'];
-$level=$_POST['level'];
+// Vérifier si le formulaire a été soumis
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-// Préparer et exécuter la requête d'insertion
-$sql = "INSERT INTO Candidature (nom, email, telephone, sex, cv, letter, level) VALUES ('$nom', '$email', '$telephone','$sex','$cv','$letter','$level')";
-if ($connexion->query($sql) === TRUE) {
-    echo "Candidature réussie !";
-} else {
-    echo "Erreur : " . $sql . "<br>" . $connexion->error;
+    // Vérification des données du formulaire
+    $nom = isset($_POST['name']) ? $_POST['name'] : '';
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $telephone = isset($_POST['telephone']) ? $_POST['telephone'] : '';
+    $sex = isset($_POST['sex']) ? $_POST['sex'] : '';
+    $level = isset($_POST['level']) ? $_POST['level'] : '';
+
+    // Vérification des fichiers
+    $cv = isset($_FILES['cv']) ? $_FILES['cv']['name'] : '';
+    $letter = isset($_FILES['letter']) ? $_FILES['letter']['name'] : '';
+
+    // Déplacement des fichiers uploadés vers un dossier sur le serveur
+    if ($cv && $letter) {
+        move_uploaded_file($_FILES['cv']['tmp_name'], "uploads/" . basename($cv));
+        move_uploaded_file($_FILES['letter']['tmp_name'], "uploads/" . basename($letter));
+    }
+
+    // Préparer et exécuter la requête d'insertion
+    $sql = "INSERT INTO Candidature (nom, email, telephone, sex, cv, letter, level) 
+            VALUES ('$nom', '$email', '$telephone', '$sex', '$cv', '$letter', '$level')";
+
+    if ($connexion->query($sql) === TRUE) {
+        echo "Inscription réussie !";
+    } else {
+        echo "Erreur : " . $sql . "<br>" . $connexion->error;
+    }
 }
 
 // Fermer la connexion
 $connexion->close();
-?>
-
-<h2><a href="index.html"></a> </h2>
-<h2><a href="view.php"></a> </h2>
-   </body>
+?><br><br>
+<button><a href="view.php">Voir les données</a></button>
+</body>
 </html>

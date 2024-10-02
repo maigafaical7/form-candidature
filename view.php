@@ -4,7 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Données de candidature</title>
-
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
     <h1>Données de candidature</h1>
@@ -14,9 +27,9 @@
         $serveur = "localhost";
         $utilisateur = "root";
         $mot_de_passe = "";
-        $base_de_données = "db_candidature";
+        $base_de_donnees = "init_php";
 
-        $connexion = new mysqli($serveur, $utilisateur, $mot_de_passe, $base_de_données);
+        $connexion = new mysqli($serveur, $utilisateur, $mot_de_passe, $base_de_donnees);
 
         // Vérifier la connexion
         if ($connexion->connect_error) {
@@ -30,9 +43,22 @@
         if ($resultat->num_rows > 0) {
             // Afficher les données dans un tableau
             echo "<table>";
-            echo "<tr><th>ID</th><th>Nom</th><th>Email</th><th>Telephone</th><th>Sex</th><th>CV</th><th>Letter</th><th>Level></th></tr>";
+            echo "<tr><th>ID</th><th>Nom</th><th>Email</th><th>Téléphone</th><th>Sexe</th><th>CV</th><th>Lettre</th><th>Niveau d'étude</th></tr>";
             while ($row = $resultat->fetch_assoc()) {
-                echo "<tr><td>".$row["id"]."</td><td>".$row["nom"]."</td><td>".$row["email"]."</td><td>".$row["telephone"].$row["sex"].$row["cv"].$row["letter"].$row["level"]."</td></tr>";
+                // Générer des liens de téléchargement pour le CV et la lettre
+                $cv_link = "uploads/" . $row["cv"];
+                $letter_link = "uploads/" . $row["letter"];
+                
+                echo "<tr>
+                         <td>".$row["id"]."</td>
+                         <td>".$row["nom"]."</td>
+                         <td>".$row["email"]."</td>
+                         <td>".$row["telephone"]."</td>
+                         <td>".$row["sex"]."</td>
+                         <td><a href='$cv_link' download>".$row["cv"]."</a></td>
+                         <td><a href='$letter_link' download>".$row["letter"]."</a></td>
+                         <td>".$row["level"]."</td>
+                    </tr>";
             }
             echo "</table>";
         } else {
@@ -42,8 +68,9 @@
         // Fermer la connexion
         $connexion->close();
         ?>
-    </div>
-    <h2><a href="connexion.php">Se connecter</a></h2>
-    <h2><a href="view.php">Se connecter</a></h2>
+    </div><br><br>
+
+    <button><a href="index.html">S'inscrire</a></button>
+
 </body>
 </html>

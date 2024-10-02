@@ -5,44 +5,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire de candidature</title>
 </head>
+<style>
+/* Global settings */
+body {
+    font-family: 'Arial', sans-serif;
+    background: url(background.jpeg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 50px;
+    line-height: 1.6;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+form {
+    width: 500px; /* Réduit la largeur du formulaire */
+    margin: 0 auto; /* Centre le formulaire sur la page */
+    padding: 10px; /* Espace interne du formulaire */
+    border: 2px solid rgb(109, 132, 138); /* Ajoute une bordure légère */
+    border-radius: 15px; /* Arrondit les coins */
+    font-size: 14px; /* Réduit la taille de la police */
+    background-color: transparent;
+    backdrop-filter: blur(50px);
+   
+}
+
+
+
+fieldset {
+    border: none; /* Retire les bordures du fieldset */
+    padding: 5px; /* Réduit l'espace interne du fieldset */
+
+}
+
+
+label {
+    display: inline-block;
+    margin-bottom:2px; /* Espace vertical entre les labels et les champs */
+    font-size: 15px; /* Taille réduite des labels */
+    color: black;
+    
+}
+
+input[type="text"], input[type="email"], input[type="tel"], input[type="file"] {
+    width: 100%; /* Les champs prennent toute la largeur du formulaire */
+    padding: 5px; /* Réduit l'espace interne dans les champs de saisie */
+    margin-bottom: 10px; /* Espace en bas de chaque champ */
+    font-size: 17px; /* Taille réduite des champs */
+    box-sizing: border-box; /* S'assure que la largeur inclut le padding */
+    border-radius: 10px;
+   border: 1px solid black;
+}
+
+.radios {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Réduit l'espace horizontal entre les éléments radio */
+}
+
+input[type="submit"] {
+    padding: 8px 10px; /* Réduit l'espace interne du bouton */
+    font-size: 14px; /* Réduit la taille du texte dans le bouton */
+    cursor: pointer; /* Ajoute un curseur de pointeur */
+    background-color: #4CAF50; /* Couleur du bouton */
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+    
+h1 {
+    font-size: 30px; /* Réduit la taille du titre */
+    text-align: center; /* Centre le titre */
+}
+
+legend {
+    font-size: 14px; /* Taille réduite pour les légendes */
+}
+.parcour{
+    color: white;
+}
+
+</style>
 <body>
-    <h1>Formulaire de candidature</h1>
+    
     <form action="connexion.php" method="post">
+        <h1>Application Form</h1>
          <fieldset>
-            <legend>Informations personnelles</legend>
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" required><br><br>
+            <div class="infopers">
+                <label for="name">Name:</label>
+            <input type="text" name="name" id="name" placeholder="Enter your name">
 
             <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required><br><br>
+            <input type="email" name="email" id="email" placeholder="Enter your email" required>
 
             <label for="telephone">Phone number:</label>
-            <input type="tel" name="telephone" id="telephone" required><br><br>
-
-            <label for="sex">Sex:</label>
-            <input type="radio" name="sex" id="H" value="H" >
-            <label for="H">H</label>
-            <input type="radio" name="sex" id="F" value="F" >
-            <label for="F">F</label>
-
-         </fieldset><br>
+            <input type="tel" name="telephone" id="telephone" placeholder="Enter your phone number" required>
+        
+            </div>
+            
+            <div class="radios">
+                <label for="sex">Sex:</label>
+                <input type="radio" name="sex" id="H" value="H" >
+                <label for="H">H</label>
+                <input type="radio" name="sex" id="F" value="F" >
+                <label for="F">F</label>
+    
+            </div>
+           
+         </fieldset>
 
          <fieldset>
-            <legend>Parcours professionel</legend>
-            <label for="cv">CV:</label>
-            <input type="file" name="cv" id="cv" required><br><br>
+            <div class="parcour">
+                <label for="cv">CV:</label>
+                <input type="file" name="cv" id="cv" required>
+    
+                <label for="letter">Cover letter:</label>
+                <input type="file" name="letter" id="letter" required>
+    
+                <label for="level">Level of study:</label>
+                <input type="text" name="level" id="level"  placeholder="Enter your study level" required>
+                 
+            </div>
+           
+         </fieldset>
 
-            <label for="letter">Cover letter:</label>
-            <input type="file" name="letter" id="letter" required><br><br>
-
-            <label for="level">Level of study:</label>
-            <input type="text" name="level" id="level" required><br><br>
-             
-         </fieldset><br><br>
-
-         <input type="submit" value="submit">
+         <input type="submit" value="submit" name="submit">
 
     </form>
-    <h2><a href="view.php">Afficher la liste des candidats</a>
+
+ 
 </body>
 </html>
